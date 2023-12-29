@@ -1,43 +1,43 @@
-import 'package:example/Widgets/TwAboutSection.dart';
+import 'package:example/Widgets/GxAboutSection.dart';
 import 'package:flutter/material.dart';
-import 'package:tailwind/tailwind.dart';
+import 'package:geniui/geniui.dart';
 
-import 'Widgets/TwButtonExample.dart';
+import 'Widgets/GxButtonExample.dart';
 
 void main() async {
-  await TwService.init();
+  await GxService.init();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TwAppBuilder(
+    return GxAppBuilder(
       builder: (BuildContext context, ThemeMode _themeMode) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           themeMode: _themeMode,
-          navigatorKey: TwService.appKey,
+          navigatorKey: GxService.appKey,
           theme: ThemeData(
-            primaryColor: TwColors.gray.shade800,
+            primaryColor: GxColors.gray.shade800,
             textTheme: TextTheme(
               displaySmall: TextStyle(
-                color: TwColors.slate.shade700,
+                color: GxColors.slate.shade700,
               ),
             ),
             appBarTheme: AppBarTheme(
-              backgroundColor: TwColors.slate.shade800,
+              backgroundColor: GxColors.slate.shade800,
               elevation: 0,
               centerTitle: true,
             ),
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
-            scaffoldBackgroundColor: TwColors.gray.shade900,
+            scaffoldBackgroundColor: GxColors.gray.shade900,
             textTheme: TextTheme(
               displaySmall: TextStyle(
-                color: TwColors.white,
+                color: GxColors.white,
                 fontSize: 24,
               ),
             ),
@@ -59,13 +59,13 @@ class ExamplePage extends StatelessWidget {
         title: "Tailwind UI style for flutter".isText.render(),
         elevation: 0.0,
       ),
-      backgroundColor: TwColors.scaffoldBackgroundColor(context),
+      backgroundColor: GxColors.scaffoldBackgroundColor(context),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: TwPadding(
-            child: TwColumn(<Widget>[
-              /// TwButton Example
-              TwButtonExample(),
+          child: GxPadding(
+            child: GxColumn(<Widget>[
+              /// GxButton Example
+              GxButtonExample(),
             ]).alignStart.justifyCenter.min.render(),
           ).py4.px3.render(),
         ),

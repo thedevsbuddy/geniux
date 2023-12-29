@@ -103,11 +103,11 @@
 
 ## 0.4.2
 
-- Fixed `https://github.com/thedevsbuddy/tailwind_cli/issues/6` Issue.
+- Fixed `https://github.com/thedevsbuddy/geniux/issues/6` Issue.
 
 ## 0.4.1
 
-- Fixed `export "./extensions/TwContextExtension.dart";` Issue.
+- Fixed `export "./extensions/GxContextExtension.dart";` Issue.
 
 ## 0.4.0
 
@@ -174,7 +174,7 @@
 
 ## 0.1.5
 
-- Added BorderMixin to `tailwind_cli` project.
+- Added BorderMixin to `geniux` project.
 - Added Border for the `TwContainer`.
 - Renamed `border()` method to `withBorder()`.
 

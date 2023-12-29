@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tailwind/tailwind.dart';
+import 'package:geniui/geniui.dart';
 
-class TwButtonExample extends StatelessWidget {
-  const TwButtonExample({super.key});
+class GxButtonExample extends StatelessWidget {
+  const GxButtonExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return TwColumn(<Widget>[
-      "TwButton".isText.displaySmall(context).render(),
+    return GxColumn(<Widget>[
+      "GxButton".isText.displaySmall(context).render(),
     ]).alignStart.justifyStart.min.render();
   }
 }

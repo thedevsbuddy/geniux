@@ -1,38 +1,38 @@
 import 'package:dcli/dcli.dart';
-import 'package:tailwind_cli/src/utilities/Utils.dart';
-import 'package:tailwind_cli/tailwind/lib/extensions/TwColorExtension.dart'
-    as twColorExtension;
-import 'package:tailwind_cli/tailwind/lib/extensions/TwContextExtension.dart'
-    as twContextExtension;
-import 'package:tailwind_cli/tailwind/lib/extensions/TwNumbersExtension.dart'
-    as twNumbersExtension;
-import 'package:tailwind_cli/tailwind/lib/extensions/TwWidgetExtension.dart'
-    as twWidgetExtension;
+import 'package:geniux/src/utilities/Utils.dart';
+import 'package:geniux/geniui/lib/extensions/GxColorExtension.dart'
+    as gxColorExtension;
+import 'package:geniux/geniui/lib/extensions/GxContextExtension.dart'
+    as gxContextExtension;
+import 'package:geniux/geniui/lib/extensions/GxNumbersExtension.dart'
+    as gxNumbersExtension;
+import 'package:geniux/geniui/lib/extensions/GxWidgetExtension.dart'
+    as gxWidgetExtension;
 
 Future<void> generate(List<String> args) async {
-  await generateTwColorExtension();
-  await generateTwNumbersExtension();
-  await generateTwWidgetExtension();
-  await generateTwContextExtension();
+  await generateGxColorExtension();
+  await generateGxNumbersExtension();
+  await generateGxWidgetExtension();
+  await generateGxContextExtension();
 }
 
-/// Generate [TwStringExtension]
-Future<void> generateTwColorExtension() async {
-  /// Get Tw Utility stub Template / File
-  var twColorExtensionData = twColorExtension.stub;
+/// Generate [GxStringExtension]
+Future<void> generateGxColorExtension() async {
+  /// Get Gx Utility stub Template / File
+  var gxColorExtensionData = gxColorExtension.stub;
 
   /// Process stub Template / File
-  twColorExtensionData = twColorExtensionData.replaceAll(
+  gxColorExtensionData = gxColorExtensionData.replaceAll(
       "//opacity", processOpacity(Utils.configs.opacity));
 
   /// Check and create
-  Utils.makeDir(twColorExtension.target);
+  Utils.makeDir(gxColorExtension.target);
 
   /// Write File
-  Utils.writeFile(twColorExtension.file, twColorExtensionData);
+  Utils.writeFile(gxColorExtension.file, gxColorExtensionData);
 
   /// Show Success message
-  print(green("Tailwind Color Extension generated successfully!"));
+  print(green("GxColor Extension generated successfully!"));
 }
 
 String processOpacity(Map<String, dynamic>? opacity) {
@@ -49,38 +49,38 @@ String processOpacity(Map<String, dynamic>? opacity) {
   return op;
 }
 
-/// Generate [TwWidgetExtension]
-Future<void> generateTwWidgetExtension() async {
+/// Generate [GxWidgetExtension]
+Future<void> generateGxWidgetExtension() async {
   /// Check and create
-  Utils.makeDir(twWidgetExtension.target);
+  Utils.makeDir(gxWidgetExtension.target);
 
   /// Write File
-  Utils.writeFile(twWidgetExtension.file, twWidgetExtension.stub);
+  Utils.writeFile(gxWidgetExtension.file, gxWidgetExtension.stub);
 
   /// Show Success message
-  print(green("Tailwind Widget Extension generated successfully!"));
+  print(green("GxWidget Extension generated successfully!"));
 }
 
-/// Generate [TwNumbersExtension]
-Future<void> generateTwNumbersExtension() async {
+/// Generate [GxNumbersExtension]
+Future<void> generateGxNumbersExtension() async {
   /// Check and create
-  Utils.makeDir(twNumbersExtension.target);
+  Utils.makeDir(gxNumbersExtension.target);
 
   /// Write File
-  Utils.writeFile(twNumbersExtension.file, twNumbersExtension.stub);
+  Utils.writeFile(gxNumbersExtension.file, gxNumbersExtension.stub);
 
   /// Show Success message
-  print(green("Tailwind Widget Extension generated successfully!"));
+  print(green("GxWidget Extension generated successfully!"));
 }
 
-/// Generate [TwNumbersExtension]
-Future<void> generateTwContextExtension() async {
+/// Generate [GxNumbersExtension]
+Future<void> generateGxContextExtension() async {
   /// Check and create
-  Utils.makeDir(twContextExtension.target);
+  Utils.makeDir(gxContextExtension.target);
 
   /// Write File
-  Utils.writeFile(twContextExtension.file, twContextExtension.stub);
+  Utils.writeFile(gxContextExtension.file, gxContextExtension.stub);
 
   /// Show Success message
-  print(green("Tailwind Context Extension generated successfully!"));
+  print(green("GxContext Extension generated successfully!"));
 }

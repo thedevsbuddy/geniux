@@ -2,28 +2,28 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dcli/dcli.dart';
-import 'package:tailwind_cli/src/utilities/Utils.dart';
-import 'package:tailwind_cli/tailwind.config.dart' as defaultConfig;
-import 'package:tailwind_cli/tailwind/lib/mixins/TwAlignmentMixin.dart'
-    as twAlignmentMixin;
-import 'package:tailwind_cli/tailwind/lib/mixins/TwBorderMixin.dart'
-    as twBorderMixin;
-import 'package:tailwind_cli/tailwind/lib/mixins/TwColorMixin.dart'
-    as twColorMixin;
-import 'package:tailwind_cli/tailwind/lib/mixins/TwGradientMixin.dart'
-    as twGradientMixin;
-import 'package:tailwind_cli/tailwind/lib/mixins/TwMarginMixin.dart'
-    as twMarginMixin;
-import 'package:tailwind_cli/tailwind/lib/mixins/TwPaddingMixin.dart'
-    as twPaddingMixin;
-import 'package:tailwind_cli/tailwind/lib/mixins/TwRoundnessMixin.dart'
-    as twRoundnessMixin;
-import 'package:tailwind_cli/tailwind/lib/mixins/TwShadowMixin.dart'
-    as twShadowMixin;
-import 'package:tailwind_cli/tailwind/lib/mixins/TwGestureMixin.dart'
-    as twGestureMixin;
-import 'package:tailwind_cli/tailwind/lib/mixins/TwSizeMixin.dart'
-    as twSizeMixin;
+import 'package:geniux/src/utilities/Utils.dart';
+import 'package:geniux/geniui.config.dart' as defaultConfig;
+import 'package:geniux/geniui/lib/mixins/GxAlignmentMixin.dart'
+    as gxAlignmentMixin;
+import 'package:geniux/geniui/lib/mixins/GxBorderMixin.dart'
+    as gxBorderMixin;
+import 'package:geniux/geniui/lib/mixins/GxColorMixin.dart'
+    as gxColorMixin;
+import 'package:geniux/geniui/lib/mixins/GxGradientMixin.dart'
+    as gxGradientMixin;
+import 'package:geniux/geniui/lib/mixins/GxMarginMixin.dart'
+    as gxMarginMixin;
+import 'package:geniux/geniui/lib/mixins/GxPaddingMixin.dart'
+    as gxPaddingMixin;
+import 'package:geniux/geniui/lib/mixins/GxRoundnessMixin.dart'
+    as gxRoundnessMixin;
+import 'package:geniux/geniui/lib/mixins/GxShadowMixin.dart'
+    as gxShadowMixin;
+import 'package:geniux/geniui/lib/mixins/GxGestureMixin.dart'
+    as gxGestureMixin;
+import 'package:geniux/geniui/lib/mixins/GxSizeMixin.dart'
+    as gxSizeMixin;
 
 Future<void> generate(List<String> args) async {
   await generateColorMixin();
@@ -40,7 +40,7 @@ Future<void> generate(List<String> args) async {
 /// Generate Color Mixin
 Future<void> generateColorMixin() async {
   /// Get default config file
-  final configFile = File("tailwind.config.json").readAsStringSync();
+  final configFile = File("geniui.config.json").readAsStringSync();
 
   /// Decode / Convert default config to map
   final dynamic userConfigs = jsonDecode(configFile);
@@ -56,18 +56,18 @@ Future<void> generateColorMixin() async {
     configs['colors']!.addAll(userConfigs['colors']);
   }
 
-  /// Get Tw Utility stub Template / File
-  var twColorMixinFileData = twColorMixin.stub;
+  /// Get Gx Utility stub Template / File
+  var gxColorMixinFileData = gxColorMixin.stub;
 
   /// Process stub Template / File
-  twColorMixinFileData = twColorMixinFileData.replaceAll(
+  gxColorMixinFileData = gxColorMixinFileData.replaceAll(
       "%colorGetters%", processColors(configs['colors']));
 
   /// Check and create
-  Utils.makeDir(twColorMixin.target);
+  Utils.makeDir(gxColorMixin.target);
 
   /// Write File
-  Utils.writeFile(twColorMixin.file, twColorMixinFileData);
+  Utils.writeFile(gxColorMixin.file, gxColorMixinFileData);
 
   /// Show Success message
   print(green("Color Mixin Generated successfully!"));
@@ -85,13 +85,13 @@ String processColors(Map<String, dynamic>? colors) {
         if (k == "DEFAULT") {
           val = Utils.hexToColor("$val");
           color += """T get $key {
-      if(!_needsDarkVariant) twColor = TwColors.$key;
+      if(!_needsDarkVariant) gxColor = GxColors.$key;
       return _child;
   }\n\t""";
         } else {
           val = Utils.hexToColor("$val");
           color += """T get $key$k {
-      if(!_needsDarkVariant) twColor = TwColors.$key.shade$k;
+      if(!_needsDarkVariant) gxColor = GxColors.$key.shade$k;
       return _child;
   }\n\t""";
         }
@@ -105,7 +105,7 @@ String processColors(Map<String, dynamic>? colors) {
             color += """T get onDark${Utils.ucFirst(key, preserveAfter: true)} {
       if(_brightness == Brightness.dark){
         _needsDarkVariant = true;
-         twColor = TwColors.$key;
+         gxColor = GxColors.$key;
       }
       return _child;
   }\n\t""";
@@ -115,7 +115,7 @@ String processColors(Map<String, dynamic>? colors) {
                 """T get onDark${Utils.ucFirst(key, preserveAfter: true)}$k {
       if(_brightness == Brightness.dark){
         _needsDarkVariant = true;
-        twColor = TwColors.$key.shade$k;
+        gxColor = GxColors.$key.shade$k;
       }
       return _child;
   }\n\t""";
@@ -125,7 +125,7 @@ String processColors(Map<String, dynamic>? colors) {
     } else if (value is String) {
       value = Utils.hexToColor("$value");
       color += """T get $key {
-      if(!_needsDarkVariant) twColor = TwColors.$key;
+      if(!_needsDarkVariant) gxColor = GxColors.$key;
       return _child;
   }\n\t""";
 
@@ -133,14 +133,14 @@ String processColors(Map<String, dynamic>? colors) {
         color += """T get onDark${Utils.ucFirst(key, preserveAfter: true)} {
       if(_brightness == Brightness.dark){
         _needsDarkVariant = true;
-        twColor = TwColors.$key;
+        gxColor = GxColors.$key;
       }
       return _child;
   }\n\t""";
       }
     } else {
       throw new Exception(
-          'Invalid value for colors["$key"] in "tailwind.config.json" file');
+          'Invalid value for colors["$key"] in "geniui.config.json" file');
     }
   });
   return color;
@@ -148,23 +148,23 @@ String processColors(Map<String, dynamic>? colors) {
 
 /// Generate Padding & Margin Mixin
 Future<void> generateSpacingMixin() async {
-  /// Get Tw Utility stub Template / File
-  var twPaddingMixinFileData = twPaddingMixin.stub;
-  var twMarginMixinFileData = twMarginMixin.stub;
+  /// Get Gx Utility stub Template / File
+  var gxPaddingMixinFileData = gxPaddingMixin.stub;
+  var gxMarginMixinFileData = gxMarginMixin.stub;
 
   /// Process stub Template / File
-  twPaddingMixinFileData = twPaddingMixinFileData.replaceAll(
+  gxPaddingMixinFileData = gxPaddingMixinFileData.replaceAll(
       "%paddingGetters%", processPaddings(Utils.configs.spacers));
-  twMarginMixinFileData = twMarginMixinFileData.replaceAll(
+  gxMarginMixinFileData = gxMarginMixinFileData.replaceAll(
       "%marginGetters%", processMargins(Utils.configs.spacers));
 
   /// Check and create
-  Utils.makeDir(twPaddingMixin.target);
-  Utils.makeDir(twMarginMixin.target);
+  Utils.makeDir(gxPaddingMixin.target);
+  Utils.makeDir(gxMarginMixin.target);
 
   /// Write File
-  Utils.writeFile(twPaddingMixin.file, twPaddingMixinFileData);
-  Utils.writeFile(twMarginMixin.file, twMarginMixinFileData);
+  Utils.writeFile(gxPaddingMixin.file, gxPaddingMixinFileData);
+  Utils.writeFile(gxMarginMixin.file, gxMarginMixinFileData);
 
   /// Show Success message
   print(green("Padding Mixin Generated successfully!"));
@@ -183,10 +183,10 @@ String processPaddings(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get p$key {
-    paddingLeft = TwSizes.spacer$key;
-    paddingTop = TwSizes.spacer$key;
-    paddingRight = TwSizes.spacer$key;
-    paddingBottom = TwSizes.spacer$key;
+    paddingLeft = GxSizes.spacer$key;
+    paddingTop = GxSizes.spacer$key;
+    paddingRight = GxSizes.spacer$key;
+    paddingBottom = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -198,8 +198,8 @@ String processPaddings(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get px$key {
-    paddingLeft = TwSizes.spacer$key;
-    paddingRight = TwSizes.spacer$key;
+    paddingLeft = GxSizes.spacer$key;
+    paddingRight = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -211,8 +211,8 @@ String processPaddings(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get py$key {
-    paddingTop = TwSizes.spacer$key;
-    paddingBottom = TwSizes.spacer$key;
+    paddingTop = GxSizes.spacer$key;
+    paddingBottom = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -224,7 +224,7 @@ String processPaddings(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get pl$key {
-    paddingLeft = TwSizes.spacer$key;
+    paddingLeft = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -236,7 +236,7 @@ String processPaddings(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get pt$key {
-    paddingTop = TwSizes.spacer$key;
+    paddingTop = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -248,7 +248,7 @@ String processPaddings(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get pr$key {
-    paddingRight = TwSizes.spacer$key;
+    paddingRight = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -260,7 +260,7 @@ String processPaddings(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get pb$key {
-    paddingBottom = TwSizes.spacer$key;
+    paddingBottom = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -281,10 +281,10 @@ String processMargins(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get m$key {
-    marginLeft = TwSizes.spacer$key;
-    marginTop = TwSizes.spacer$key;
-    marginRight = TwSizes.spacer$key;
-    marginBottom = TwSizes.spacer$key;
+    marginLeft = GxSizes.spacer$key;
+    marginTop = GxSizes.spacer$key;
+    marginRight = GxSizes.spacer$key;
+    marginBottom = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -296,8 +296,8 @@ String processMargins(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get mx$key {
-    marginLeft = TwSizes.spacer$key;
-    marginRight = TwSizes.spacer$key;
+    marginLeft = GxSizes.spacer$key;
+    marginRight = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -309,8 +309,8 @@ String processMargins(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get my$key {
-    marginTop = TwSizes.spacer$key;
-    marginBottom = TwSizes.spacer$key;
+    marginTop = GxSizes.spacer$key;
+    marginBottom = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -322,7 +322,7 @@ String processMargins(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get ml$key {
-    marginLeft = TwSizes.spacer$key;
+    marginLeft = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -334,7 +334,7 @@ String processMargins(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get mt$key {
-    marginTop = TwSizes.spacer$key;
+    marginTop = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -346,7 +346,7 @@ String processMargins(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get mr$key {
-    marginRight = TwSizes.spacer$key;
+    marginRight = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -358,7 +358,7 @@ String processMargins(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key != 'DEFAULT') {
       spacer += """T get mb$key {
-    marginBottom = TwSizes.spacer$key;
+    marginBottom = GxSizes.spacer$key;
     return _child;
   }\n\t""";
     }
@@ -370,10 +370,10 @@ String processMargins(Map<String, dynamic>? spacers) {
 /// Generate Alignment Mixin
 Future<void> generateAlignmentMixin() async {
   /// Check and create
-  Utils.makeDir(twAlignmentMixin.target);
+  Utils.makeDir(gxAlignmentMixin.target);
 
   /// Write File
-  Utils.writeFile(twAlignmentMixin.file, twAlignmentMixin.stub);
+  Utils.writeFile(gxAlignmentMixin.file, gxAlignmentMixin.stub);
 
   /// Show Success message
   print(green("Alignment Mixin generated successfully!"));
@@ -382,10 +382,10 @@ Future<void> generateAlignmentMixin() async {
 /// Generate Roundness Mixin
 Future<void> generateRoundnessMixin() async {
   /// Check and create
-  Utils.makeDir(twRoundnessMixin.target);
+  Utils.makeDir(gxRoundnessMixin.target);
 
   /// Write File
-  Utils.writeFile(twRoundnessMixin.file, twRoundnessMixin.stub);
+  Utils.writeFile(gxRoundnessMixin.file, gxRoundnessMixin.stub);
 
   /// Show Success message
   print(green("Roundness Mixin generated successfully!"));
@@ -394,10 +394,10 @@ Future<void> generateRoundnessMixin() async {
 /// Generate Roundness Mixin
 Future<void> generateShadowMixin() async {
   /// Check and create
-  Utils.makeDir(twShadowMixin.target);
+  Utils.makeDir(gxShadowMixin.target);
 
   /// Write File
-  Utils.writeFile(twShadowMixin.file, twShadowMixin.stub);
+  Utils.writeFile(gxShadowMixin.file, gxShadowMixin.stub);
 
   /// Show Success message
   print(green("Shadow Mixin generated successfully!"));
@@ -405,18 +405,18 @@ Future<void> generateShadowMixin() async {
 
 /// Generate Gradient Mixin
 Future<void> generateGradientMixin() async {
-  /// Get Tw Utility stub Template / File
-  var twGradientMixinFileData = twGradientMixin.stub;
+  /// Get Gx Utility stub Template / File
+  var gxGradientMixinFileData = gxGradientMixin.stub;
 
   /// Process stub Template / File
-  twGradientMixinFileData = twGradientMixinFileData.replaceAll(
+  gxGradientMixinFileData = gxGradientMixinFileData.replaceAll(
       "%gradientColors%", processGradientColors(Utils.configs.colors));
 
   /// Check and create directory
-  Utils.makeDir(twGradientMixin.target);
+  Utils.makeDir(gxGradientMixin.target);
 
   /// Write File
-  Utils.writeFile(twGradientMixin.file, twGradientMixinFileData);
+  Utils.writeFile(gxGradientMixin.file, gxGradientMixinFileData);
 
   /// Show Success message
   print(green("Gradient Mixin Generated successfully!"));
@@ -433,20 +433,20 @@ String processGradientColors(Map<String, dynamic>? colors) {
       value.forEach((k, val) {
         if (k == "DEFAULT") {
           color += """T get from${Utils.ucFirst(key, preserveAfter: true)} {
-      if (!_needsDarkVariant) gradientColors[0] = TwColors.$key;
+      if (!_needsDarkVariant) gradientColors[0] = GxColors.$key;
       return _child;
   }\n\t""";
           color += """T get to${Utils.ucFirst(key, preserveAfter: true)} {
-      if (!_needsDarkVariant) gradientColors[1] = TwColors.$key;
+      if (!_needsDarkVariant) gradientColors[1] = GxColors.$key;
       return _child;
   }\n\t""";
         } else {
           color += """T get from${Utils.ucFirst(key, preserveAfter: true)}$k {
-      if (!_needsDarkVariant) gradientColors[0] = TwColors.$key.shade$k;
+      if (!_needsDarkVariant) gradientColors[0] = GxColors.$key.shade$k;
       return _child;
   }\n\t""";
           color += """T get to${Utils.ucFirst(key, preserveAfter: true)}$k {
-      if (!_needsDarkVariant) gradientColors[1] = TwColors.$key.shade$k;
+      if (!_needsDarkVariant) gradientColors[1] = GxColors.$key.shade$k;
       return _child;
   }\n\t""";
         }
@@ -459,7 +459,7 @@ String processGradientColors(Map<String, dynamic>? colors) {
                 """T get onDarkFrom${Utils.ucFirst(key, preserveAfter: true)} {
       if (_brightness == Brightness.dark) {
         _needsDarkVariant = true;
-        gradientColors[0] = TwColors.$key;
+        gradientColors[0] = GxColors.$key;
       }
       return _child;
   }\n\t""";
@@ -467,7 +467,7 @@ String processGradientColors(Map<String, dynamic>? colors) {
                 """T get onDarkTo${Utils.ucFirst(key, preserveAfter: true)} {
       if (_brightness == Brightness.dark) {
         _needsDarkVariant = true;
-        gradientColors[1] = TwColors.$key;
+        gradientColors[1] = GxColors.$key;
       }
       return _child;
   }\n\t""";
@@ -476,7 +476,7 @@ String processGradientColors(Map<String, dynamic>? colors) {
                 """T get onDarkFrom${Utils.ucFirst(key, preserveAfter: true)}$k {
       if (_brightness == Brightness.dark) {
         _needsDarkVariant = true;
-        gradientColors[0] = TwColors.$key.shade$k;
+        gradientColors[0] = GxColors.$key.shade$k;
       }
       return _child;
   }\n\t""";
@@ -484,7 +484,7 @@ String processGradientColors(Map<String, dynamic>? colors) {
                 """T get onDarkTo${Utils.ucFirst(key, preserveAfter: true)}$k {
       if (_brightness == Brightness.dark) {
         _needsDarkVariant = true;
-        gradientColors[1] = TwColors.$key.shade$k;
+        gradientColors[1] = GxColors.$key.shade$k;
       }
       return _child;
   }\n\t""";
@@ -493,11 +493,11 @@ String processGradientColors(Map<String, dynamic>? colors) {
       }
     } else {
       color += """T get from${Utils.ucFirst(key, preserveAfter: true)} {
-      if (!_needsDarkVariant) gradientColors[0] = TwColors.$key;
+      if (!_needsDarkVariant) gradientColors[0] = GxColors.$key;
       return _child;
   }\n\t""";
       color += """T get to${Utils.ucFirst(key, preserveAfter: true)} {
-      if (!_needsDarkVariant) gradientColors[1] = TwColors.$key;
+      if (!_needsDarkVariant) gradientColors[1] = GxColors.$key;
       return _child;
   }\n\t""";
 
@@ -505,14 +505,14 @@ String processGradientColors(Map<String, dynamic>? colors) {
         color += """T get onDarkFrom${Utils.ucFirst(key, preserveAfter: true)} {
       if (_brightness == Brightness.dark) {
         _needsDarkVariant = true;
-        gradientColors[0] = TwColors.$key;
+        gradientColors[0] = GxColors.$key;
       }
       return _child;
   }\n\t""";
         color += """T get onDarkTo${Utils.ucFirst(key, preserveAfter: true)} {
       if (_brightness == Brightness.dark) {
         _needsDarkVariant = true;
-        gradientColors[1] = TwColors.$key;
+        gradientColors[1] = GxColors.$key;
       }
       return _child;
   }\n\t""";
@@ -524,20 +524,20 @@ String processGradientColors(Map<String, dynamic>? colors) {
 
 /// Generate Border Mixin
 Future<void> generateBorderMixin() async {
-  /// Get Tw Utility stub Template / File
-  var twBorderMixinFileData = twBorderMixin.stub;
+  /// Get Gx Utility stub Template / File
+  var gxBorderMixinFileData = gxBorderMixin.stub;
 
   /// Process stub Template / File
-  twBorderMixinFileData = twBorderMixinFileData.replaceAll(
+  gxBorderMixinFileData = gxBorderMixinFileData.replaceAll(
       "%colors%", processBorderColors(Utils.configs.colors));
-  twBorderMixinFileData = twBorderMixinFileData.replaceAll(
+  gxBorderMixinFileData = gxBorderMixinFileData.replaceAll(
       "%sizes%", processBorderWidths(Utils.configs.spacers));
 
   /// Check and create
-  Utils.makeDir(twBorderMixin.target);
+  Utils.makeDir(gxBorderMixin.target);
 
   /// Write File
-  Utils.writeFile(twBorderMixin.file, twBorderMixinFileData);
+  Utils.writeFile(gxBorderMixin.file, gxBorderMixinFileData);
 
   /// Show Success message
   print(green("Padding Mixin Generated successfully!"));
@@ -555,13 +555,13 @@ String processBorderColors(Map<String, dynamic>? colors) {
         if (k == "DEFAULT") {
           val = Utils.hexToColor("$val");
           color += """T get border${Utils.ucFirst(key, preserveAfter: true)} {
-      if(!_needsDarkVariant) twBorderColor = TwColors.$key;
+      if(!_needsDarkVariant) gxBorderColor = GxColors.$key;
       return _child;
   }\n\t""";
         } else {
           val = Utils.hexToColor("$val");
           color += """T get border${Utils.ucFirst(key, preserveAfter: true)}$k {
-      if(!_needsDarkVariant) twBorderColor = TwColors.$key.shade$k;
+      if(!_needsDarkVariant) gxBorderColor = GxColors.$key.shade$k;
       return _child;
   }\n\t""";
         }
@@ -576,7 +576,7 @@ String processBorderColors(Map<String, dynamic>? colors) {
                 """T get onDarkBorder${Utils.ucFirst(key, preserveAfter: true)} {
       if (_brightness == Brightness.dark) {
         _needsDarkVariant = true;
-        twBorderColor = TwColors.$key;
+        gxBorderColor = GxColors.$key;
       }
       return _child;
   }\n\t""";
@@ -586,7 +586,7 @@ String processBorderColors(Map<String, dynamic>? colors) {
                 """T get onDarkBorder${Utils.ucFirst(key, preserveAfter: true)}$k {
        if (_brightness == Brightness.dark) {
         _needsDarkVariant = true;
-        twBorderColor = TwColors.$key.shade$k;
+        gxBorderColor = GxColors.$key.shade$k;
       }
       return _child;
   }\n\t""";
@@ -596,7 +596,7 @@ String processBorderColors(Map<String, dynamic>? colors) {
     } else if (value is String) {
       value = Utils.hexToColor("$value");
       color += """T get border${Utils.ucFirst(key, preserveAfter: true)} {
-      if(!_needsDarkVariant) twBorderColor = TwColors.$key;
+      if(!_needsDarkVariant) gxBorderColor = GxColors.$key;
       return _child;
   }\n\t""";
 
@@ -607,7 +607,7 @@ String processBorderColors(Map<String, dynamic>? colors) {
             """T get onDarkBorder${Utils.ucFirst(key, preserveAfter: true)} {
       if (_brightness == Brightness.dark) {
         _needsDarkVariant = true;
-        twBorderColor = TwColors.$key;
+        gxBorderColor = GxColors.$key;
       }
       return _child;
   }\n\t""";
@@ -630,12 +630,12 @@ String processBorderWidths(Map<String, dynamic>? spacers) {
   spacers.forEach((key, value) {
     if (key == 'DEFAULT') {
       spacer += """T get borderBase {
-    twBorderWidth = TwSizes.spacer; 
+    gxBorderWidth = GxSizes.spacer; 
     return _child;
   }\n\t""";
     } else {
       spacer += """T get border$key {
-    twBorderWidth = TwSizes.spacer$key; 
+    gxBorderWidth = GxSizes.spacer$key; 
     return _child;
   }\n\t""";
     }
@@ -644,26 +644,26 @@ String processBorderWidths(Map<String, dynamic>? spacers) {
   return spacer;
 }
 
-/// Generate [TwGestureMixin] Mixin
+/// Generate [GxGestureMixin] Mixin
 Future<void> generateGestureMixin() async {
   /// Check and create
-  Utils.makeDir(twGestureMixin.target);
+  Utils.makeDir(gxGestureMixin.target);
 
   /// Write File
-  Utils.writeFile(twGestureMixin.file, twGestureMixin.stub);
+  Utils.writeFile(gxGestureMixin.file, gxGestureMixin.stub);
 
   /// Show Success message
-  print(green("TwGesture Mixin generated successfully!"));
+  print(green("GxGesture Mixin generated successfully!"));
 }
 
-/// Generate [TwSizeMixin] Mixin
+/// Generate [GxSizeMixin] Mixin
 Future<void> generateSizeMixin() async {
   /// Check and create
-  Utils.makeDir(twSizeMixin.target);
+  Utils.makeDir(gxSizeMixin.target);
 
   /// Write File
-  Utils.writeFile(twSizeMixin.file, twSizeMixin.stub);
+  Utils.writeFile(gxSizeMixin.file, gxSizeMixin.stub);
 
   /// Show Success message
-  print(green("TwSize Mixin generated successfully!"));
+  print(green("GxSize Mixin generated successfully!"));
 }

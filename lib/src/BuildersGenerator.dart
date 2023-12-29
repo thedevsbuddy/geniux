@@ -1,148 +1,148 @@
 import 'package:dcli/dcli.dart';
-import 'package:tailwind_cli/src/utilities/Utils.dart';
-import 'package:tailwind_cli/tailwind/lib/builders/TwButton.dart' as twButton;
-import 'package:tailwind_cli/tailwind/lib/builders/TwColumn.dart' as twColumn;
-import 'package:tailwind_cli/tailwind/lib/builders/TwContainer.dart'
-    as twContainer;
-import 'package:tailwind_cli/tailwind/lib/builders/TwImage.dart' as twImage;
-import 'package:tailwind_cli/tailwind/lib/builders/TwPadding.dart' as twPadding;
-import 'package:tailwind_cli/tailwind/lib/builders/TwRow.dart' as twRow;
-import 'package:tailwind_cli/tailwind/lib/builders/TwStack.dart' as twStack;
-import 'package:tailwind_cli/tailwind/lib/builders/TwWrap.dart' as twWrap;
-import 'package:tailwind_cli/tailwind/lib/builders/TwInkwell.dart' as twInkWell;
+import 'package:geniux/src/utilities/Utils.dart';
+import 'package:geniux/geniui/lib/builders/GxButton.dart' as gxButton;
+import 'package:geniux/geniui/lib/builders/GxColumn.dart' as gxColumn;
+import 'package:geniux/geniui/lib/builders/GxContainer.dart'
+    as gxContainer;
+import 'package:geniux/geniui/lib/builders/GxImage.dart' as gxImage;
+import 'package:geniux/geniui/lib/builders/GxPadding.dart' as gxPadding;
+import 'package:geniux/geniui/lib/builders/GxRow.dart' as gxRow;
+import 'package:geniux/geniui/lib/builders/GxStack.dart' as gxStack;
+import 'package:geniux/geniui/lib/builders/GxWrap.dart' as gxWrap;
+import 'package:geniux/geniui/lib/builders/GxInkwell.dart' as gxInkWell;
 
 // Builder Generators
-import "BuilderGenerators/TwBuilderGenerator.dart" as twBuilderGenerator;
+import "BuilderGenerators/GxBuilderGenerator.dart" as gxBuilderGenerator;
 
 Future<void> generate(_) async {
-  await twBuilderGenerator.generate(_);
-  await generateTwContainer();
-  await generateTwButton();
-  await generateTwRow();
-  await generateTwColumn();
-  await generateTwWrap();
-  await generateTwPadding();
-  await generateTwStack();
-  await generateTwInkWell();
-  await generateTwImage();
+  await gxBuilderGenerator.generate(_);
+  await generateGxContainer();
+  await generateGxButton();
+  await generateGxRow();
+  await generateGxColumn();
+  await generateGxWrap();
+  await generateGxPadding();
+  await generateGxStack();
+  await generateGxInkWell();
+  await generateGxImage();
 }
 
-/// Generate [TwRow]
-Future<void> generateTwRow() async {
+/// Generate [GxRow]
+Future<void> generateGxRow() async {
   /// Check and create
-  Utils.makeDir(twRow.target);
+  Utils.makeDir(gxRow.target);
 
   /// Write File
-  Utils.writeFile(twRow.file, twRow.stub);
+  Utils.writeFile(gxRow.file, gxRow.stub);
 
   /// Show Success message
-  print(green("Tailwind Row generated successfully!"));
+  print(green("GxRow generated successfully!"));
 }
 
-/// Generate [TwColumn]
-Future<void> generateTwColumn() async {
+/// Generate [GxColumn]
+Future<void> generateGxColumn() async {
   /// Check and create
-  Utils.makeDir(twColumn.target);
+  Utils.makeDir(gxColumn.target);
 
   /// Write File
-  Utils.writeFile(twColumn.file, twColumn.stub);
+  Utils.writeFile(gxColumn.file, gxColumn.stub);
 
   /// Show Success message
-  print(green("Tailwind Column generated successfully!"));
+  print(green("GxColumn generated successfully!"));
 }
 
-/// Generate [TwWrap]
-Future<void> generateTwWrap() async {
+/// Generate [GxWrap]
+Future<void> generateGxWrap() async {
   /// Check and create
-  Utils.makeDir(twWrap.target);
+  Utils.makeDir(gxWrap.target);
 
   /// Write File
-  Utils.writeFile(twWrap.file, twWrap.stub);
+  Utils.writeFile(gxWrap.file, gxWrap.stub);
 
   /// Show Success message
-  print(green("Tailwind Wrap generated successfully!"));
+  print(green("GxWrap generated successfully!"));
 }
 
-/// Generate [TwContainer]
-Future<void> generateTwContainer() async {
-  /// Get Tw Utility stub Template / File
-  var twContainerFileData = twContainer.stub;
+/// Generate [GxContainer]
+Future<void> generateGxContainer() async {
+  /// Get Gx Utility stub Template / File
+  var gxContainerFileData = gxContainer.stub;
 
   /// Check and create
-  Utils.makeDir(twContainer.target);
+  Utils.makeDir(gxContainer.target);
 
   /// Write File
-  Utils.writeFile(twContainer.file, twContainerFileData);
+  Utils.writeFile(gxContainer.file, gxContainerFileData);
 
   /// Show Success message
-  print(green("TwContainer Generated successfully!"));
+  print(green("GxContainer Generated successfully!"));
 }
 
-/// Generate [TwButton]
-Future<void> generateTwButton() async {
+/// Generate [GxButton]
+Future<void> generateGxButton() async {
   /// Check and create
-  Utils.makeDir(twButton.target);
+  Utils.makeDir(gxButton.target);
 
   /// Write File
-  Utils.writeFile(twButton.file, twButton.stub);
+  Utils.writeFile(gxButton.file, gxButton.stub);
 
   /// Show Success message
-  print(green("TwButton generated successfully!"));
+  print(green("GxButton generated successfully!"));
 }
 
-/// Generate [TwPadding]
-Future<void> generateTwPadding() async {
+/// Generate [GxPadding]
+Future<void> generateGxPadding() async {
   /// Check and create
-  Utils.makeDir(twPadding.target);
+  Utils.makeDir(gxPadding.target);
 
   /// Write File
-  Utils.writeFile(twPadding.file, twPadding.stub);
+  Utils.writeFile(gxPadding.file, gxPadding.stub);
 
   /// Show Success message
-  print(green("TwPadding generated successfully!"));
+  print(green("GxPadding generated successfully!"));
 }
 
-/// Generate [TwStack]
-Future<void> generateTwStack() async {
+/// Generate [GxStack]
+Future<void> generateGxStack() async {
   /// Check and create
-  Utils.makeDir(twStack.target);
+  Utils.makeDir(gxStack.target);
 
   /// Write File
-  Utils.writeFile(twStack.file, twStack.stub);
+  Utils.writeFile(gxStack.file, gxStack.stub);
 
   /// Show Success message
-  print(green("TwStack generated successfully!"));
+  print(green("GxStack generated successfully!"));
 }
 
-/// Generate [TwInkWell]
-Future<void> generateTwInkWell() async {
+/// Generate [GxInkWell]
+Future<void> generateGxInkWell() async {
   /// Check and create
-  Utils.makeDir(twInkWell.target);
+  Utils.makeDir(gxInkWell.target);
 
   /// Write File
-  Utils.writeFile(twInkWell.file, twInkWell.stub);
+  Utils.writeFile(gxInkWell.file, gxInkWell.stub);
 
   /// Show Success message
-  print(green("TwInkWell generated successfully!"));
+  print(green("GxInkWell generated successfully!"));
 }
 
-/// Generate [TwImage]
-Future<void> generateTwImage() async {
-  /// Get Tw Utility stub Template / File
-  var twImageData = twImage.stub;
+/// Generate [GxImage]
+Future<void> generateGxImage() async {
+  /// Get Gx Utility stub Template / File
+  var gxImageData = gxImage.stub;
 
   /// Process stub Template / File
-  twImageData = twImageData.replaceAll(
+  gxImageData = gxImageData.replaceAll(
       "%opacity%", processOpacity(Utils.configs.opacity));
 
   /// Check and create
-  Utils.makeDir(twImage.target);
+  Utils.makeDir(gxImage.target);
 
   /// Write File
-  Utils.writeFile(twImage.file, twImageData);
+  Utils.writeFile(gxImage.file, gxImageData);
 
   /// Show Success message
-  print(green("TwImage generated successfully!"));
+  print(green("GxImage generated successfully!"));
 }
 
 String processOpacity(Map<String, dynamic>? opacity) {
@@ -153,13 +153,13 @@ String processOpacity(Map<String, dynamic>? opacity) {
   opacity.forEach((key, value) {
     if (value != '' || key != '') {
       op +=
-          "TwImage get o$key => this.._opacity = AlwaysStoppedAnimation($value);\n\t";
+          "GxImage get o$key => this.._opacity = AlwaysStoppedAnimation($value);\n\t";
       op +=
-          "TwImage get opacity$key => this.._opacity = AlwaysStoppedAnimation($value);\n\t\n\t";
+          "GxImage get opacity$key => this.._opacity = AlwaysStoppedAnimation($value);\n\t\n\t";
     }
   });
   return op;
 }
 
-// TwImage get o20 => this.._opacity = AlwaysStoppedAnimation(.5);
-// TwImage get opacity20 => this.._opacity = AlwaysStoppedAnimation(.5);
+// GxImage get o20 => this.._opacity = AlwaysStoppedAnimation(.5);
+// GxImage get opacity20 => this.._opacity = AlwaysStoppedAnimation(.5);

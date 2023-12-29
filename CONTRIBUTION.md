@@ -16,7 +16,7 @@ Contribution to this repository is very simple you can just fork this repository
 
 ## Contribute to docs.
 
-Please refer to this [TailwindCLI Docs](https://github.com/thedevsbuddy/tailwind-cli-docs) repository.
+Please refer to this [GeniUX Docs](https://github.com/thedevsbuddy/geniux-docs) repository.
 
 Steps contribute:
 - Fork repository

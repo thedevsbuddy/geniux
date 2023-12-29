@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dcli/dcli.dart';
-import 'package:tailwind_cli/src/utilities/ConfigModel.dart';
-import 'package:tailwind_cli/tailwind.config.dart' as defaultConfig;
+import 'package:geniux/src/utilities/ConfigModel.dart';
+import 'package:geniux/geniui.config.dart' as defaultConfig;
 
 Map<String, dynamic>? baseConfigs = {
   "darkMode": false,
@@ -34,7 +34,7 @@ class Utils {
     ConfigModel _config = ConfigModel.fromJson(baseConfigs!);
 
     /// Get default config file
-    final configFile = File("tailwind.config.json").readAsStringSync();
+    final configFile = File("geniui.config.json").readAsStringSync();
 
     /// Decode / Convert default config to map
     final ConfigModel userConfigs =
@@ -78,7 +78,7 @@ class Utils {
     configs = _config;
   }
 
-  /// To publish in Tw Utility ///
+  /// To publish in Gx Utility ///
 
   /// Convert Hex Color To Dart [int] Color
   static String hexToColor(String code) {

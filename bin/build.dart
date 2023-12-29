@@ -2,19 +2,19 @@
 
 import "dart:io";
 
-import "package:tailwind_cli/src/BuildersGenerator.dart" as buildersGenerator;
-import "package:tailwind_cli/src/WidgetsGenerator.dart" as widgetsGenerator;
-import "package:tailwind_cli/src/ExtensionsGenerator.dart"
+import "package:geniux/src/BuildersGenerator.dart" as buildersGenerator;
+import "package:geniux/src/WidgetsGenerator.dart" as widgetsGenerator;
+import "package:geniux/src/ExtensionsGenerator.dart"
     as extensionGenerator;
-import "package:tailwind_cli/src/MixinsGenerator.dart" as mixinsGenerator;
-import "package:tailwind_cli/src/TailwindGenerator.dart" as tailwindGenerator;
-import "package:tailwind_cli/src/UtilityGenerator.dart" as utilityGenerator;
-import 'package:tailwind_cli/src/utilities/Utils.dart';
+import "package:geniux/src/MixinsGenerator.dart" as mixinsGenerator;
+import "package:geniux/src/GeniuiGenerator.dart" as geniuiGenerator;
+import "package:geniux/src/UtilityGenerator.dart" as utilityGenerator;
+import 'package:geniux/src/utilities/Utils.dart';
 
 void main(List<String> args) async {
   Utils.createConfig();
   await utilityGenerator.generate(args);
-  await tailwindGenerator.generate(args);
+  await geniuiGenerator.generate(args);
   await mixinsGenerator.generate(args);
   await buildersGenerator.generate(args);
   await widgetsGenerator.generate(args);
@@ -25,7 +25,7 @@ void main(List<String> args) async {
 void formatGeneratedCode() async {
   print('Formatting Code....');
   try {
-    final result = await Process.run('dart', ['format', 'tailwind']);
+    final result = await Process.run('dart', ['format', 'geniui']);
     if (result.exitCode == 0) {
       print(result.stdout);
     } else {

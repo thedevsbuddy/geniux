@@ -1,5 +1,5 @@
-import "WidgetGenerators/TwTextGenerator.dart" as twTextGenerator;
+import "WidgetGenerators/GxTextGenerator.dart" as gxTextGenerator;
 
 Future<void> generate(_) async {
-  await twTextGenerator.generate(_);
+  await gxTextGenerator.generate(_);
 }

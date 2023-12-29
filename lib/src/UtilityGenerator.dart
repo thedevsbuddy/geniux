@@ -1,83 +1,83 @@
 import 'package:dcli/dcli.dart';
-import 'package:tailwind_cli/src/utilities/Utils.dart';
-import 'package:tailwind_cli/tailwind/lib/utilities/TwColors.dart'
-    as utilityTwColors;
-import 'package:tailwind_cli/tailwind/lib/utilities/TwSizes.dart'
-    as utilityTwSizes;
-import 'package:tailwind_cli/tailwind/lib/utilities/TwUtils.dart'
-    as utilityTwUtils;
-import 'package:tailwind_cli/tailwind/lib/utilities/TwService.dart'
-    as utilityTwService;
+import 'package:geniux/src/utilities/Utils.dart';
+import 'package:geniux/geniui/lib/utilities/GxColors.dart'
+    as utilityGxColors;
+import 'package:geniux/geniui/lib/utilities/GxSizes.dart'
+    as utilityGxSizes;
+import 'package:geniux/geniui/lib/utilities/GxUtils.dart'
+    as utilityGxUtils;
+import 'package:geniux/geniui/lib/utilities/GxService.dart'
+    as utilityGxService;
 
 Future<void> generate(List<String> args) async {
-  await generateTwServiceUtility();
-  await generateTwColorsUtility();
-  await generateTwUtilsUtility();
-  await generateTwSpacersUtility();
+  await generateGxServiceUtility();
+  await generateGxColorsUtility();
+  await generateGxUtilsUtility();
+  await generateGxSpacersUtility();
 }
 
-Future<void> generateTwServiceUtility() async {
-  /// Get Tw Utility stub Template / File
-  var utilityTwFile = utilityTwService.stub;
+Future<void> generateGxServiceUtility() async {
+  /// Get Gx Utility stub Template / File
+  var utilityGxFile = utilityGxService.stub;
 
   /// Check and create
-  Utils.makeDir(utilityTwService.target);
+  Utils.makeDir(utilityGxService.target);
 
   /// Write File
-  Utils.writeFile(utilityTwService.file, utilityTwFile);
+  Utils.writeFile(utilityGxService.file, utilityGxFile);
 
   /// Show Success message
-  print(green("TwService Generated successfully!"));
+  print(green("GxService Generated successfully!"));
 }
 
-Future<void> generateTwUtilsUtility() async {
-  /// Get Tw Utility stub Template / File
-  var utilityTwFile = utilityTwUtils.stub;
+Future<void> generateGxUtilsUtility() async {
+  /// Get Gx Utility stub Template / File
+  var utilityGxFile = utilityGxUtils.stub;
 
   /// Process stub Template / File
-  utilityTwFile = processStub(stub: utilityTwFile, data: Utils.configs);
+  utilityGxFile = processStub(stub: utilityGxFile, data: Utils.configs);
 
   /// Check and create
-  Utils.makeDir(utilityTwUtils.target);
+  Utils.makeDir(utilityGxUtils.target);
 
   /// Write File
-  Utils.writeFile(utilityTwUtils.file, utilityTwFile);
-
-  /// Show Success message
-  print(green("Utilities Generated successfully!"));
-}
-
-Future<void> generateTwColorsUtility() async {
-  /// Get Tw Utility stub Template / File
-  var colorsUtilityTwFile = utilityTwColors.stub;
-
-  /// Process stub Template / File
-  colorsUtilityTwFile =
-      processStub(stub: colorsUtilityTwFile, data: Utils.configs);
-
-  /// Check and create
-  Utils.makeDir(utilityTwColors.target);
-
-  /// Write File
-  Utils.writeFile(utilityTwColors.file, colorsUtilityTwFile);
+  Utils.writeFile(utilityGxUtils.file, utilityGxFile);
 
   /// Show Success message
   print(green("Utilities Generated successfully!"));
 }
 
-Future<void> generateTwSpacersUtility() async {
-  /// Get Tw Utility stub Template / File
-  var spacerUtilityTwFile = utilityTwSizes.stub;
+Future<void> generateGxColorsUtility() async {
+  /// Get Gx Utility stub Template / File
+  var colorsUtilityGxFile = utilityGxColors.stub;
 
   /// Process stub Template / File
-  spacerUtilityTwFile =
-      processStub(stub: spacerUtilityTwFile, data: Utils.configs);
+  colorsUtilityGxFile =
+      processStub(stub: colorsUtilityGxFile, data: Utils.configs);
 
   /// Check and create
-  Utils.makeDir(utilityTwSizes.target);
+  Utils.makeDir(utilityGxColors.target);
 
   /// Write File
-  Utils.writeFile(utilityTwSizes.file, spacerUtilityTwFile);
+  Utils.writeFile(utilityGxColors.file, colorsUtilityGxFile);
+
+  /// Show Success message
+  print(green("Utilities Generated successfully!"));
+}
+
+Future<void> generateGxSpacersUtility() async {
+  /// Get Gx Utility stub Template / File
+  var spacerUtilityGxFile = utilityGxSizes.stub;
+
+  /// Process stub Template / File
+  spacerUtilityGxFile =
+      processStub(stub: spacerUtilityGxFile, data: Utils.configs);
+
+  /// Check and create
+  Utils.makeDir(utilityGxSizes.target);
+
+  /// Write File
+  Utils.writeFile(utilityGxSizes.file, spacerUtilityGxFile);
 
   /// Show Success message
   print(green("Utilities Generated successfully!"));
